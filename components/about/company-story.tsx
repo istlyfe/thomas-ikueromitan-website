@@ -23,7 +23,7 @@ export function CompanyStory() {
                 A Legacy of Excellence
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in 2009, Thomas Ikueromitan & Sons Nigeria Limited began as a small family business 
+                Founded in 2017, Thomas Ikueromitan & Sons Nigeria Limited began as a small family business 
                 with a vision to bridge the gap between quality suppliers and businesses in need of reliable 
                 procurement services.
               </p>
@@ -41,7 +41,7 @@ export function CompanyStory() {
             {/* Key Milestones */}
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-4 bg-background rounded-lg border">
-                <div className="text-2xl font-bold text-primary mb-2">2009</div>
+                <div className="text-2xl font-bold text-primary mb-2">2017</div>
                 <div className="text-sm text-muted-foreground">Company Founded</div>
               </div>
               <div className="text-center p-4 bg-background rounded-lg border">
