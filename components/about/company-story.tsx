@@ -45,7 +45,7 @@ export function CompanyStory() {
                 <div className="text-sm text-muted-foreground">Company Founded</div>
               </div>
               <div className="text-center p-4 bg-background rounded-lg border">
-                <div className="text-2xl font-bold text-primary mb-2">2015</div>
+                <div className="text-2xl font-bold text-primary mb-2">2019</div>
                 <div className="text-sm text-muted-foreground">First Major Contract</div>
               </div>
               <div className="text-center p-4 bg-background rounded-lg border">
@@ -87,7 +87,7 @@ export function CompanyStory() {
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Years Experience</span>
                   <Badge variant="secondary" className="bg-primary/10 text-primary">
-                    15+
+                    8+
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">

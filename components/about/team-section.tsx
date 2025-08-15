@@ -15,7 +15,7 @@ export function TeamSection() {
     {
       name: "Management Team",
       position: "Senior Leadership",
-      experience: "15+ years",
+      experience: "8+ years",
       expertise: ["Operations", "Logistics", "Quality Assurance"],
       description: "Our experienced management team brings together expertise from various industries, ensuring comprehensive solutions for our clients' procurement needs.",
       achievements: ["500+ Projects", "50+ Suppliers", "Regional Expansion"]
@@ -35,7 +35,7 @@ export function TeamSection() {
       name: "Procurement",
       icon: Building2,
       description: "Specialized sourcing across all sectors",
-      teamSize: "15+ specialists"
+      teamSize: "8+ specialists"
     },
     {
       name: "Logistics",

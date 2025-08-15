@@ -19,7 +19,7 @@ export default function AboutPage() {
                 About <span className="text-primary">Thomas Ikueromitan & Sons</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Over 15 years of excellence in procurement and trading services, connecting businesses 
+                Over 8 years of excellence in procurement and trading services, connecting businesses 
                 to reliable suppliers across Nigeria and West Africa.
               </p>
             </div>

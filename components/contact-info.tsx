@@ -15,9 +15,9 @@ export function ContactInfo() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground text-sm mb-4">
             Thomas Ikueromitan & Sons Nigeria Limited is a leading procurement and trading company 
-            with over 15 years of experience serving businesses across Nigeria and West Africa.
+            with over 8 years of experience serving businesses across Nigeria and West Africa.
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary" className="bg-primary/10 text-primary">
@@ -146,7 +146,7 @@ export function ContactInfo() {
             <div className="flex items-start space-x-3">
               <Clock className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
               <div>
-                <h4 className="font-semibold text-foreground">15+ Years Experience</h4>
+                <h4 className="font-semibold text-foreground">8+ Years Experience</h4>
                 <p className="text-sm text-muted-foreground">Deep industry knowledge and expertise</p>
               </div>
             </div>

@@ -37,7 +37,7 @@ export function WhyChooseUs() {
             Why Choose Thomas Ikueromitan & Sons?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Over 15 years of experience delivering reliable procurement and trading services
+            Over 8 years of experience delivering reliable procurement and trading services
           </p>
         </div>
 

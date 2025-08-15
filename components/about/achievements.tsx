@@ -11,7 +11,7 @@ export function Achievements() {
       icon: Building2
     },
     {
-      year: "2012",
+      year: "2019",
       title: "First Major Contract",
       description: "Secured first large-scale procurement project",
       icon: CheckCircle
