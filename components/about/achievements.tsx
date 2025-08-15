@@ -53,16 +53,16 @@ export function Achievements() {
     {
       name: "ISO Compliance",
       description: "International Organization for Standardization",
-      year: "2015",
+      year: "2025",
       icon: Award,
-      status: "Maintained"
+      status: "In Progress"
     },
     {
       name: "ECOWAS Trade Partner",
       description: "Economic Community of West African States",
-      year: "2018",
+      year: "2025",
       icon: Globe,
-      status: "Certified"
+      status: "In Progress"
     }
   ]
 
