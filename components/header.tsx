@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Phone, MessageCircle } from "lucide-react"
+import { Menu, Phone } from "lucide-react"
 
 const PHONE_E164 = "+2349168295957"
 const WHATSAPP_URL =
@@ -50,26 +50,18 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop actions */}
+          {/* Desktop actions: ONLY WhatsApp + Call */}
           <div className="hidden sm:flex items-center space-x-2">
-            {/* Send Inquiry (links to a section or page) */}
+            {/* Send Inquiry (opens WhatsApp) */}
             <Button size="sm" asChild>
-              <Link href="/#inquiry" aria-label="Send an inquiry">
-                Send Inquiry
-              </Link>
-            </Button>
-
-            {/* WhatsApp chat */}
-            <Button variant="secondary" size="sm" asChild className="hidden md:inline-flex">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Chat on WhatsApp"
-                title="Chat on WhatsApp"
+                aria-label="Send inquiry on WhatsApp"
+                title="Send inquiry on WhatsApp"
               >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                WhatsApp
+                Send Inquiry
               </a>
             </Button>
 
@@ -113,23 +105,18 @@ export function Header() {
                     </Link>
                   ))}
 
+                {/* Mobile actions: ONLY WhatsApp + Call */}
                   <div className="pt-4 space-y-2">
-                    {/* Send Inquiry */}
+                    {/* Send Inquiry (WhatsApp) */}
                     <Button className="w-full" asChild onClick={() => setIsOpen(false)}>
-                      <Link href="/#inquiry" aria-label="Send an inquiry">Send Inquiry</Link>
-                    </Button>
-
-                    {/* WhatsApp chat */}
-                    <Button variant="secondary" className="w-full" asChild onClick={() => setIsOpen(false)}>
                       <a
                         href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Chat on WhatsApp"
-                        title="Chat on WhatsApp"
+                        aria-label="Send inquiry on WhatsApp"
+                        title="Send inquiry on WhatsApp"
                       >
-                        <MessageCircle className="h-4 w-4 mr-2" />
-                        WhatsApp
+                        Send Inquiry
                       </a>
                     </Button>
 
