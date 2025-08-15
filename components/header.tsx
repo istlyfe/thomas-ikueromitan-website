@@ -4,7 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Phone } from "lucide-react"
+import { Menu, Phone, MessageCircle } from "lucide-react"
+
+const PHONE_E164 = "+2349168295957"
+const WHATSAPP_URL =
+  "https://wa.me/2349168295957?text=Hello%20Thomas%20IKueromitan%20and%20Sons%20Nigeria%20Limited%20(LTD)%20%E2%80%94%20I%27d%20like%20to%20send%20an%20inquiry."
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,9 +32,7 @@ export function Header() {
               </div>
               <div className="hidden sm:block">
                 <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
-                <div className="text-xs text-muted-foreground tracking-wider">
-                  NIGERIA LTD
-                </div>
+                <div className="text-xs text-muted-foreground tracking-wider">NIGERIA LTD</div>
               </div>
             </Link>
           </div>
@@ -48,19 +50,43 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center space-x-4">
-            <Button size="sm" className="hidden sm:inline-flex">
-              Request a Quote
-            </Button>
-            <Button variant="outline" size="sm" className="hidden sm:inline-flex bg-transparent">
-              <Phone className="h-4 w-4 mr-2" />
-              Call Us
+          {/* Desktop actions */}
+          <div className="hidden sm:flex items-center space-x-2">
+            {/* Send Inquiry (links to a section or page) */}
+            <Button size="sm" asChild>
+              <Link href="/#inquiry" aria-label="Send an inquiry">
+                Send Inquiry
+              </Link>
             </Button>
 
-            {/* Mobile menu */}
+            {/* WhatsApp chat */}
+            <Button variant="secondary" size="sm" asChild className="hidden md:inline-flex">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat on WhatsApp"
+                title="Chat on WhatsApp"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                WhatsApp
+              </a>
+            </Button>
+
+            {/* Call Us */}
+            <Button variant="outline" size="sm" asChild className="bg-transparent">
+              <a href={`tel:${PHONE_E164}`} aria-label="Call us">
+                <Phone className="h-4 w-4 mr-2" />
+                Call Us
+              </a>
+            </Button>
+          </div>
+
+          {/* Mobile menu */}
+          <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" className="md:hidden">
+                <Button variant="ghost" size="sm" aria-label="Open menu">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
@@ -71,11 +97,10 @@ export function Header() {
                   </div>
                   <div>
                     <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
-                    <div className="text-xs text-muted-foreground tracking-wider">
-                      NIGERIA LTD
-                    </div>
+                    <div className="text-xs text-muted-foreground tracking-wider">NIGERIA LTD</div>
                   </div>
                 </div>
+
                 <nav className="flex flex-col space-y-4">
                   {navigation.map((item) => (
                     <Link
@@ -87,11 +112,33 @@ export function Header() {
                       {item.name}
                     </Link>
                   ))}
+
                   <div className="pt-4 space-y-2">
-                    <Button className="w-full">Request a Quote</Button>
-                    <Button variant="outline" className="w-full bg-transparent">
-                      <Phone className="h-4 w-4 mr-2" />
-                      Call Us
+                    {/* Send Inquiry */}
+                    <Button className="w-full" asChild onClick={() => setIsOpen(false)}>
+                      <Link href="/#inquiry" aria-label="Send an inquiry">Send Inquiry</Link>
+                    </Button>
+
+                    {/* WhatsApp chat */}
+                    <Button variant="secondary" className="w-full" asChild onClick={() => setIsOpen(false)}>
+                      <a
+                        href={WHATSAPP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Chat on WhatsApp"
+                        title="Chat on WhatsApp"
+                      >
+                        <MessageCircle className="h-4 w-4 mr-2" />
+                        WhatsApp
+                      </a>
+                    </Button>
+
+                    {/* Call Us */}
+                    <Button variant="outline" className="w-full bg-transparent" asChild onClick={() => setIsOpen(false)}>
+                      <a href={`tel:${PHONE_E164}`} aria-label="Call us">
+                        <Phone className="h-4 w-4 mr-2" />
+                        Call Us
+                      </a>
                     </Button>
                   </div>
                 </nav>
