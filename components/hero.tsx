@@ -34,7 +34,7 @@ export function Hero() {
               <div className="text-sm text-muted-foreground">Trusted Suppliers</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-primary">15+</div>
+              <div className="text-2xl font-bold text-primary">8+</div>
               <div className="text-sm text-muted-foreground">Years Experience</div>
             </div>
             <div>
