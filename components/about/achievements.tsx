@@ -46,7 +46,7 @@ export function Achievements() {
     {
       name: "CAC Registration",
       description: "Corporate Affairs Commission of Nigeria",
-      year: "2009",
+      year: "2017",
       icon: CheckCircle,
       status: "Active"
     },
