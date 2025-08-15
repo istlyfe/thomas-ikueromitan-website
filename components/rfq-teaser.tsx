@@ -43,7 +43,7 @@ export function RFQTeaser() {
                 </div>
                 <div className="md:col-span-2 flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="flex-1">
-                    Submit RFQ
+                    Request a Quote
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                   <Button variant="outline" size="lg" className="flex-1 bg-transparent">
