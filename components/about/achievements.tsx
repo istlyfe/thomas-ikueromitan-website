@@ -5,7 +5,7 @@ import { Trophy, Award, Star, TrendingUp, Users, Globe, Building2, CheckCircle }
 export function Achievements() {
   const milestones = [
     {
-      year: "2009",
+      year: "2017",
       title: "Company Founded",
       description: "Started as a small family business in Lagos",
       icon: Building2
@@ -80,7 +80,7 @@ export function Achievements() {
       icon: Users
     },
     {
-      number: "15+",
+      number: "8+",
       label: "Years Experience",
       description: "Industry expertise and knowledge",
       icon: Award
