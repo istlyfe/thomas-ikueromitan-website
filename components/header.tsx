@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Phone } from "lucide-react"
+import { Menu, Phone, Home, Building2, Users, Truck, MessageCircle, X } from "lucide-react"
 
 const PHONE_E164 = "+2349168295957"
 const WHATSAPP_URL =
@@ -14,11 +14,11 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Sectors", href: "/sectors" },
-    { name: "About", href: "/about" },
-    { name: "Logistics", href: "/logistics" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/", icon: Home },
+    { name: "Sectors", href: "/sectors", icon: Building2 },
+    { name: "About", href: "/about", icon: Users },
+    { name: "Logistics", href: "/logistics", icon: Truck },
+    { name: "Contact", href: "/contact", icon: MessageCircle },
   ]
 
   return (
@@ -78,37 +78,62 @@ export function Header() {
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" aria-label="Open menu">
+                <Button variant="ghost" size="sm" aria-label="Open menu" className="h-10 w-10 p-0">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <div className="flex items-center space-x-2 mb-6">
-                  <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                    <span className="text-primary-foreground font-bold text-sm">TIS</span>
+              <SheetContent side="right" className="w-[320px] sm:w-[380px] p-0">
+                {/* Header with close button */}
+                <div className="flex items-center justify-between p-6 border-b">
+                  <div className="flex items-center space-x-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center">
+                      <span className="text-primary-foreground font-bold text-sm">TIS</span>
+                    </div>
+                    <div>
+                      <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
+                      <div className="text-xs text-muted-foreground tracking-wider">NIGERIA LTD</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
-                    <div className="text-xs text-muted-foreground tracking-wider">NIGERIA LTD</div>
-                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsOpen(false)}
+                    className="h-8 w-8 p-0"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
                 </div>
 
-                <nav className="flex flex-col space-y-4">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                {/* Navigation Links */}
+                <div className="flex-1 p-6">
+                  <nav className="space-y-2">
+                    {navigation.map((item) => {
+                      const Icon = item.icon
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-muted/50 hover:text-primary transition-all duration-200"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <Icon className="h-5 w-5 text-muted-foreground" />
+                          <span>{item.name}</span>
+                        </Link>
+                      )
+                    })}
+                  </nav>
 
-                {/* Mobile actions: ONLY WhatsApp + Call */}
-                  <div className="pt-4 space-y-2">
+                  {/* Divider */}
+                  <div className="my-6 border-t" />
+
+                  {/* Quick Actions */}
+                  <div className="space-y-3">
+                    <h3 className="px-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                      Quick Actions
+                    </h3>
+                    
                     {/* Send Inquiry (WhatsApp) */}
-                    <Button className="w-full" asChild onClick={() => setIsOpen(false)}>
+                    <Button className="w-full justify-start" asChild onClick={() => setIsOpen(false)}>
                       <a
                         href={WHATSAPP_URL}
                         target="_blank"
@@ -116,19 +141,35 @@ export function Header() {
                         aria-label="Send inquiry on WhatsApp"
                         title="Send inquiry on WhatsApp"
                       >
+                        <MessageCircle className="h-4 w-4 mr-3" />
                         Send Inquiry
                       </a>
                     </Button>
 
                     {/* Call Us */}
-                    <Button variant="outline" className="w-full bg-transparent" asChild onClick={() => setIsOpen(false)}>
+                    <Button variant="outline" className="w-full justify-start bg-transparent" asChild onClick={() => setIsOpen(false)}>
                       <a href={`tel:${PHONE_E164}`} aria-label="Call us">
-                        <Phone className="h-4 w-4 mr-2" />
+                        <Phone className="h-4 w-4 mr-3" />
                         Call Us
                       </a>
                     </Button>
                   </div>
-                </nav>
+
+                  {/* Company Info */}
+                  <div className="mt-8 pt-6 border-t">
+                    <div className="px-4 space-y-2">
+                      <div className="text-sm text-muted-foreground">
+                        <strong>Phone:</strong> +234 916 829 5957
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        <strong>Coverage:</strong> Nationwide (36 States + FCT)
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        <strong>Experience:</strong> 8+ Years
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </SheetContent>
             </Sheet>
           </div>
