@@ -28,13 +28,14 @@ export function CompanyStory() {
                 procurement services.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                What started as a local trading operation has grown into a comprehensive procurement and 
-                logistics company serving clients across Nigeria and the broader West African region.
+                What started as a local trading operation has grown into a comprehensive nationwide procurement 
+                and logistics company serving clients across Nigeria. We also facilitate international imports 
+                for specialized products like automobiles, connecting Nigerian businesses to global suppliers.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Today, we're proud to have facilitated over 500 successful projects, built relationships 
+                Today, we're proud to have facilitated over 500 successful projects nationwide, built relationships 
                 with 50+ trusted suppliers, and established ourselves as a reliable partner for businesses 
-                seeking quality materials and services.
+                seeking quality materials and services across Nigeria.
               </p>
             </div>
 
@@ -93,7 +94,7 @@ export function CompanyStory() {
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Countries Served</span>
                   <Badge variant="secondary" className="bg-primary/10 text-primary">
-                    8+
+                    Nigeria (Nationwide)
                   </Badge>
                 </div>
               </CardContent>

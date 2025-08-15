@@ -25,9 +25,10 @@ export function MissionVision() {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-muted-foreground leading-relaxed mb-6">
-                To be the leading procurement and trading partner in West Africa, connecting businesses 
+                To be the leading procurement and trading partner in Nigeria, connecting businesses 
                 with reliable suppliers while ensuring quality, efficiency, and cost-effectiveness in 
-                every transaction.
+                every transaction. We currently serve nationwide operations and facilitate international 
+                imports for specialized products.
               </p>
               <div className="space-y-3 text-left">
                 <div className="flex items-start space-x-3">
@@ -68,9 +69,9 @@ export function MissionVision() {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-muted-foreground leading-relaxed mb-6">
-                To become the most trusted and innovative procurement solutions provider in West Africa, 
-                driving economic development and creating sustainable value for our clients, partners, 
-                and communities.
+                To become the most trusted and innovative procurement solutions provider in Nigeria, 
+                with future expansion to ECOWAS member states. We aim to drive economic development 
+                and create sustainable value for our clients, partners, and communities across West Africa.
               </p>
               <div className="space-y-3 text-left">
                 <div className="flex items-start space-x-3">

@@ -1,6 +1,9 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Building2, Car, Wheat, Truck, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const sectors = [
   {
@@ -9,28 +12,24 @@ const sectors = [
     description:
       "Cement, rebar, structural steel, tiles, and roofing with clear specifications and competitive pricing.",
     items: ["Cement (42.5R)", "Rebar (B500B)", "Structural Steel", "Tiles & Ceramics", "Roofing Sheets"],
-    href: "/sectors/building-materials",
   },
   {
     icon: Car,
     title: "Automobile Purchases",
     description: "From inspected sedans to fleet pickups, we handle sourcing, import, and clearance.",
     items: ["Sedans & SUVs", "Toyota Hilux", "Fleet Vehicles", "Import Facilitation", "Pre-shipment Inspection"],
-    href: "/sectors/automobiles",
   },
   {
     icon: Wheat,
     title: "Agriculture",
-    description: "Grains, cocoa, cashew, livestock, and agro-inputs sourced to grade and shipped on schedule.",
-    items: ["Maize & Sorghum", "Cocoa Beans", "Cashew Nuts", "Fertilizers", "Livestock"],
-    href: "/sectors/agriculture",
+    description: "Livestock trading and agricultural produce sourcing across Nigeria.",
+    items: ["Livestock Trading", "Agricultural Produce", "Grain & Commodities", "Livestock Feed"],
   },
   {
     icon: Truck,
     title: "Transport & Haulage",
     description: "Passenger transport, staff shuttles, and goods haulage with route planning and dispatch.",
     items: ["Corporate Shuttles", "Staff Transport", "Goods Haulage", "Route Planning", "Fleet Management"],
-    href: "/sectors/transport-haulage",
   },
 ]
 
@@ -66,13 +65,15 @@ export function SectorsGrid() {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    variant="outline"
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <Link href={`/sectors#${sector.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <Button
+                      variant="outline"
+                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
+                    >
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             )

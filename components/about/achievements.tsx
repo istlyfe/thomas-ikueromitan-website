@@ -86,9 +86,9 @@ export function Achievements() {
       icon: Award
     },
     {
-      number: "8+",
-      label: "Countries Served",
-      description: "Regional presence across West Africa",
+      number: "Nigeria",
+      label: "Current Coverage",
+      description: "Nationwide operations across all states",
       icon: Globe
     }
   ]
