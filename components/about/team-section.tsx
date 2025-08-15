@@ -5,7 +5,7 @@ import { Users, Award, Building2, Globe, Phone, Mail } from "lucide-react"
 export function TeamSection() {
   const teamMembers = [
     {
-      name: "Thomas Ikueromitan",
+      name: "Damilola Egbukuyomi",
       position: "Founder & Chief Executive Officer",
       experience: "20+ years",
       expertise: ["Procurement", "International Trade", "Business Development"],
