@@ -16,7 +16,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Thomas IKueromitan and sons Nigeria Limited - Procurement & Trading",
+  title: "Thomas Ikueromitan and sons Nigeria Limited - Procurement & Trading",
   description:
     "Reliable sourcing in building materials, automobiles, agriculture, and transport & haulage across Nigeria and West Africa.",
   generator: "v0.app",

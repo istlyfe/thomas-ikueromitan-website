@@ -34,7 +34,7 @@ export function WhyChooseUs() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="font-manrope font-bold text-3xl sm:text-4xl text-foreground mb-4">
-            Why Choose Thomas IKueromitan & Sons?
+            Why Choose Thomas Ikueromitan & Sons?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Over 15 years of experience delivering reliable procurement and trading services
