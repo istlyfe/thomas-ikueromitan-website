@@ -12,7 +12,7 @@ export function Footer() {
                 <span className="text-primary-foreground font-bold text-sm">TIS</span>
               </div>
               <div>
-                <div className="font-manrope font-bold text-lg">Thomas IKueromitan & Sons</div>
+                <div className="font-manrope font-bold text-lg">Thomas Ikueromitan & Sons</div>
                 <div className="text-xs text-muted tracking-wider">NIGERIA LTD</div>
               </div>
             </div>
@@ -102,7 +102,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-muted/20 mt-12 pt-8 text-center text-sm text-muted">
-          <p>&copy; 2024 Thomas IKueromitan and sons Nigeria Limited. All rights reserved.</p>
+          <p>&copy; 2024 Thomas Ikueromitan and sons Nigeria Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>

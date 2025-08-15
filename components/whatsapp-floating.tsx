@@ -5,7 +5,7 @@ import { MessageCircle } from "lucide-react"
 
 export function WhatsAppFloating() {
   const whatsappUrl =
-    "https://wa.me/2349168295957?text=Hello%20Thomas%20IKueromitan%20and%20Sons%20Nigeria%20Limited%20(LTD)%20%E2%80%94%20I%27d%20like%20to%20request%20a%20quote."
+    "https://wa.me/2349168295957?text=Hello%20Thomas%20Ikueromitan%20and%20Sons%20Nigeria%20Limited%20(LTD)%20%E2%80%94%20I%27d%20like%20to%20request%20a%20quote."
 
   return (
     <div className="fixed bottom-6 right-6 z-50">

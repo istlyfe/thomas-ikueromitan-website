@@ -27,7 +27,7 @@ export function Header() {
                 <span className="text-primary-foreground font-bold text-sm">TIS</span>
               </div>
               <div className="hidden sm:block">
-                <div className="font-manrope font-bold text-lg text-foreground">Thomas IKueromitan & Sons</div>
+                <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
                 <div className="text-xs text-muted-foreground tracking-wider">
                   NIGERIA LTD
                 </div>
@@ -70,7 +70,7 @@ export function Header() {
                     <span className="text-primary-foreground font-bold text-sm">TIS</span>
                   </div>
                   <div>
-                    <div className="font-manrope font-bold text-lg text-foreground">Thomas IKueromitan & Sons</div>
+                    <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
                     <div className="text-xs text-muted-foreground tracking-wider">
                       NIGERIA LTD
                     </div>
