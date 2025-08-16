@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'v+opqXRtCQasGR4JQDZrzl76zKm05NtnQJ
 
 export async function GET(request: NextRequest) {
   try {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const token = cookieStore.get('admin_token')
 
     if (!token) {
