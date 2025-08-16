@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Phone, Home, Building2, Users, Truck, MessageCircle, X } from "lucide-react"
@@ -28,7 +29,7 @@ export function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">TIS</span>
+                <Image src="/TIS_logo.png" alt="TIS Logo" width={32} height={32} />
               </div>
               <div className="hidden sm:block">
                 <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>
@@ -87,7 +88,7 @@ export function Header() {
                 <div className="flex items-center justify-between p-6 border-b">
                   <div className="flex items-center space-x-3">
                     <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold text-sm">TIS</span>
+                      <Image src="/TIS_logo.png" alt="TIS Logo" width={40} height={40} />
                     </div>
                     <div>
                       <div className="font-manrope font-bold text-lg text-foreground">Thomas Ikueromitan & Sons</div>

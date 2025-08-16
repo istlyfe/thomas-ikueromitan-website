@@ -8,9 +8,9 @@
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "/cac_logo.svg",
+      "src": "/TIS_logo.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {

@@ -43,10 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} antialiased`}>
       <head>
+        <link rel="icon" href="/TIS_logo.png" sizes="any" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/cac_logo.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/TIS_logo.png" />
+        <link rel="shortcut icon" href="/TIS_logo.png" />
       </head>
       <body className="font-sans">{children}</body>
     </html>

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 
 export function Footer() {
@@ -9,7 +10,7 @@ export function Footer() {
           <div>
             <div className="flex items-center space-x-2 mb-6">
               <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">TIS</span>
+                <Image src="/TIS_logo.png" alt="TIS Logo" width={32} height={32} />
               </div>
               <div>
                 <div className="font-manrope font-bold text-lg">Thomas Ikueromitan & Sons</div>
