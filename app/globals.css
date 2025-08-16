@@ -1,5 +1,6 @@
-@import "tailwindcss";
-@import "tailwindcss-animate";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   /* Updated color tokens to match Thomas Ikueromitan brand colors */
@@ -79,5 +80,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
