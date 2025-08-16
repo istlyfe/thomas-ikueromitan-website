@@ -1,10 +1,9 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight, MessageCircle } from "lucide-react"
-import { useRouter } from "next/navigation"
 
 export function Hero() {
-  const router = useRouter()
-
   const handleRequestQuote = () => {
     // Scroll to the RFQ form section
     const rfqSection = document.getElementById('rfq-section')
