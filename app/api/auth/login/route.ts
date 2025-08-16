@@ -3,9 +3,9 @@ import { cookies } from 'next/headers'
 import { sign } from 'jsonwebtoken'
 
 // In production, these should be environment variables
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin'
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'thomas2024'
-const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this-in-production'
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'thomas_ikueromitan_admin'
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Th0m@s!Kuer0m1t@n2024!'
+const JWT_SECRET = process.env.JWT_SECRET || 'v+opqXRtCQasGR4JQDZrzl76zKm05NtnQJsKKgoGyoE='
 
 export async function POST(request: NextRequest) {
   try {

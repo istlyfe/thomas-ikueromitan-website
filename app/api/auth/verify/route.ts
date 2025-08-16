@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { verify } from 'jsonwebtoken'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this-in-production'
+const JWT_SECRET = process.env.JWT_SECRET || 'v+opqXRtCQasGR4JQDZrzl76zKm05NtnQJsKKgoGyoE='
 
 export async function GET(request: NextRequest) {
   try {

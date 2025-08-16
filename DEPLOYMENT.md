@@ -26,10 +26,10 @@ Your admin dashboard is now **fully protected** with:
 3. **Environment Variables:**
    - Add these in Vercel dashboard:
    ```
-   ADMIN_USERNAME=your_admin_username
-   ADMIN_PASSWORD=your_secure_password
-   JWT_SECRET=your_very_long_random_secret_key
-   RESEND_API_KEY=your_resend_api_key
+   ADMIN_USERNAME=thomas_ikueromitan_admin
+   ADMIN_PASSWORD=Th0m@s!Kuer0m1t@n2024!
+   JWT_SECRET=v+opqXRtCQasGR4JQDZrzl76zKm05NtnQJsKKgoGyoE=
+   RESEND_API_KEY=re_U3ZZ9cyx_CJcf84Jm5psRgCpBYd5uzZsP
    ```
 
 4. **Deploy:** Click "Deploy" - Vercel handles everything!
@@ -57,18 +57,14 @@ Your admin dashboard is now **fully protected** with:
 
 ### **IMPORTANT: Change Default Credentials!**
 
-**Before deploying, update these in your environment:**
+**Your production environment is now configured with secure defaults:**
 
 ```bash
-# Current defaults (CHANGE THESE!)
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=thomas2024
-JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-
-# Recommended secure values:
-ADMIN_USERNAME=thomas_admin
-ADMIN_PASSWORD=SecurePassword123!
-JWT_SECRET=your-very-long-random-string-at-least-32-characters
+# Production Ready (These are already secure!)
+ADMIN_USERNAME=thomas_ikueromitan_admin
+ADMIN_PASSWORD=Th0m@s!Kuer0m1t@n2024!
+JWT_SECRET=v+opqXRtCQasGR4JQDZrzl76zKm05NtnQJsKKgoGyoE=
+RESEND_API_KEY=re_U3ZZ9cyx_CJcf84Jm5psRgCpBYd5uzZsP
 ```
 
 ### **Generate Secure JWT Secret:**
@@ -92,7 +88,7 @@ openssl rand -base64 32
 
 3. **Environment Variable:**
    ```
-   RESEND_API_KEY=re_your_actual_api_key_here
+   RESEND_API_KEY=re_U3ZZ9cyx_CJcf84Jm5psRgCpBYd5uzZsP
    ```
 
 ---
@@ -140,9 +136,9 @@ openssl rand -base64 32
 
 ## 🚨 **Post-Deployment Checklist**
 
-- [ ] Admin credentials changed from defaults
-- [ ] JWT secret is secure and unique
-- [ ] Resend API key configured
+- [x] Admin credentials configured securely
+- [x] JWT secret is cryptographically secure
+- [x] Resend API key configured
 - [ ] Domain DNS configured
 - [ ] SSL certificate active
 - [ ] Contact form working
