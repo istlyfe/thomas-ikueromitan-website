@@ -83,7 +83,7 @@ export function SectorsOverview() {
         <div className="grid lg:grid-cols-2 gap-8">
           {sectors.map((sector) => {
             const Icon = sector.icon
-            const sectorId = sector.title.toLowerCase().replace(/\s+/g, '-')
+            const sectorId = sector.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
             return (
               <Card key={sector.title} id={sectorId} className="border-0 shadow-lg hover:shadow-xl transition-shadow scroll-mt-20">
                 <CardHeader>

@@ -70,8 +70,10 @@ export function SectorHighlights() {
         <div className="grid lg:grid-cols-2 gap-8">
           {highlights.map((highlight) => {
             const Icon = highlight.icon
+            // Create ID from sector name for hash navigation
+            const sectorId = highlight.sector.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
             return (
-              <Card key={highlight.sector} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <Card key={highlight.sector} id={sectorId} className="border-0 shadow-lg hover:shadow-xl transition-shadow scroll-mt-20">
                 <CardHeader>
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">

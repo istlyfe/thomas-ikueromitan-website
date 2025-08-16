@@ -25,22 +25,22 @@ export function Footer() {
             <h3 className="font-manrope font-semibold text-lg mb-4">Services</h3>
             <ul className="space-y-2 text-sm text-muted">
               <li>
-                <Link href="/sectors/building-materials" className="hover:text-background transition-colors">
+                <Link href="/sectors#building-materials" className="hover:text-background transition-colors">
                   Building Materials
                 </Link>
               </li>
               <li>
-                <Link href="/sectors/automobiles" className="hover:text-background transition-colors">
+                <Link href="/sectors#automobile-purchases" className="hover:text-background transition-colors">
                   Automobile Purchases
                 </Link>
               </li>
               <li>
-                <Link href="/sectors/agriculture" className="hover:text-background transition-colors">
+                <Link href="/sectors#agriculture" className="hover:text-background transition-colors">
                   Agriculture
                 </Link>
               </li>
               <li>
-                <Link href="/sectors/transport-haulage" className="hover:text-background transition-colors">
+                <Link href="/sectors#transport-and-haulage" className="hover:text-background transition-colors">
                   Transport & Haulage
                 </Link>
               </li>
