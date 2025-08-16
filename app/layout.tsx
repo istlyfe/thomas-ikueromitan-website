@@ -22,13 +22,16 @@ export const metadata: Metadata = {
   generator: "v0.app",
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
       { url: '/cac_logo.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', type: 'image/x-icon' },
     ],
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
   },
   manifest: '/site.webmanifest',
+}
+
+export const viewport = {
   themeColor: '#0f172a',
 }
 
@@ -39,6 +42,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} antialiased`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/cac_logo.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </head>
       <body className="font-sans">{children}</body>
     </html>
   )
