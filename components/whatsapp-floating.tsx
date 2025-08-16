@@ -2,21 +2,38 @@
 
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export function WhatsAppFloating() {
-  const whatsappUrl =
-    "https://wa.me/2349168295957?text=Hello%20Thomas%20Ikueromitan%20and%20Sons%20Nigeria%20Limited%20(LTD)%20%E2%80%94%20I%27d%20like%20to%20request%20a%20quote."
+  const handleWhatsAppClick = () => {
+    const phoneNumber = '2349168295957'
+    const message = encodeURIComponent(
+      'Hello! I\'m interested in your sourcing and logistics services for building materials, automobiles, or agriculture. Can you help me get started with a quote?'
+    )
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+    window.open(whatsappUrl, '_blank')
+  }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <Button
-        size="lg"
-        className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-shadow bg-green-500 hover:bg-green-600 text-white"
-        onClick={() => window.open(whatsappUrl, "_blank")}
-        aria-label="Chat on WhatsApp"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </Button>
-    </div>
+    <TooltipProvider>
+      <div className="fixed bottom-6 right-6 z-50">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="lg"
+              className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-all duration-300 bg-green-500 hover:bg-green-600 text-white hover:scale-110"
+              onClick={handleWhatsAppClick}
+              aria-label="Chat on WhatsApp"
+            >
+              <MessageCircle className="h-6 w-6" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="left" className="bg-green-600 text-white border-green-600">
+            <p>Chat with us on WhatsApp!</p>
+            <p className="text-xs opacity-90">Get instant quotes & support</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
   )
 }
