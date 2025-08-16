@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { supabase, CreateContactSubmission } from '@/lib/supabase-server'
 
 // Only initialize Resend if API key is available
 let resend: any = null
@@ -33,6 +34,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Create submission object for database
+    const submissionData: CreateContactSubmission = {
+      name,
+      email,
+      phone: phone || undefined,
+      company: company || undefined,
+      sector: sector || undefined,
+      message,
+      preferred_contact: preferredContact || 'email'
+    }
+
+    // Store in Supabase
+    const { data: submission, error: dbError } = await supabase
+      .from('contact_submissions')
+      .insert(submissionData)
+      .select()
+      .single()
+
+    if (dbError) {
+      console.error('Database error:', dbError)
+      return NextResponse.json(
+        { error: 'Failed to save submission. Please try again later.' },
+        { status: 500 }
+      )
+    }
+
     // Check if Resend is available
     if (!resend) {
       return NextResponse.json(
@@ -62,8 +89,8 @@ export async function POST(request: NextRequest) {
 
     // Send email to your business
     const { data, error } = await resend.emails.send({
-      from: 'Contact Form <support@thomasikueromitan.com>', // Updated to your new domain
-      to: ['support@thomasikueromitan.com'], // Changed to your domain email
+      from: 'Contact Form <support@thomasikueromitan.com>',
+      to: ['support@thomasikueromitan.com'],
       subject: `New Contact Form Submission from ${name}`,
       html: emailContent,
     })
@@ -94,7 +121,7 @@ export async function POST(request: NextRequest) {
     `
 
     await resend.emails.send({
-      from: 'Thomas Ikueromitan & Sons <support@thomasikueromitan.com>', // Updated to your new domain
+      from: 'Thomas Ikueromitan & Sons <support@thomasikueromitan.com>',
       to: [email],
       subject: 'Thank you for contacting us - Thomas Ikueromitan & Sons',
       html: confirmationEmail,
@@ -104,7 +131,7 @@ export async function POST(request: NextRequest) {
       { 
         success: true, 
         message: 'Thank you for your message! We will get back to you within 24 hours.',
-        data 
+        submissionId: submission.id
       },
       { status: 200 }
     )
@@ -118,11 +145,37 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// New API endpoint for sending replies
+// Get all submissions (for admin interface)
+export async function GET() {
+  try {
+    const { data: submissions, error } = await supabase
+      .from('contact_submissions')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Database error:', error)
+      return NextResponse.json(
+        { error: 'Failed to fetch submissions' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ submissions: submissions || [] })
+  } catch (error) {
+    console.error('Error fetching submissions:', error)
+    return NextResponse.json(
+      { error: 'Failed to fetch submissions' },
+      { status: 500 }
+    )
+  }
+}
+
+// API endpoint for sending replies
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json()
-    const { to, subject, message, replyTo } = body
+    const { to, subject, message, replyTo, submissionId } = body
 
     // Basic validation
     if (!to || !subject || !message) {
@@ -155,6 +208,27 @@ export async function PUT(request: NextRequest) {
         { error: 'Failed to send reply email. Please try again later.' },
         { status: 500 }
       )
+    }
+
+    // Update submission status in database if submissionId is provided
+    if (submissionId) {
+      try {
+        const { error: updateError } = await supabase
+          .from('contact_submissions')
+          .update({ 
+            status: 'replied',
+            replied_at: new Date().toISOString()
+          })
+          .eq('id', submissionId)
+
+        if (updateError) {
+          console.error('Error updating submission status:', updateError)
+          // Don't fail the email send if status update fails
+        }
+      } catch (updateError) {
+        console.error('Error updating submission status:', updateError)
+        // Don't fail the email send if status update fails
+      }
     }
 
     return NextResponse.json(

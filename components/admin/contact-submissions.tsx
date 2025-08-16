@@ -8,39 +8,28 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { MessageCircle, Reply, Send, Clock, User, Mail, Building2, Phone, CheckCircle, AlertCircle, Loader2, LogOut } from "lucide-react"
+import { MessageCircle, Reply, Send, Clock, User, Mail, Building2, Phone, CheckCircle, AlertCircle, Loader2, LogOut, RefreshCw } from "lucide-react"
 
-// Mock data - in a real app, this would come from a database
-const mockSubmissions = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "+234 801 234 5678",
-    company: "ABC Construction Ltd",
-    sector: "Building Materials",
-    message: "I need a quote for 1000 bags of cement and 50 tons of rebar for our new project in Lagos.",
-    preferredContact: "email",
-    timestamp: "2024-01-15T10:30:00Z",
-    status: "new"
-  },
-  {
-    id: 2,
-    name: "Sarah Johnson",
-    email: "sarah@transport.com",
-    phone: "+234 802 345 6789",
-    company: "Fast Logistics",
-    sector: "Transport & Haulage",
-    message: "We're looking for reliable transport services for our goods from Port Harcourt to Abuja. Can you provide a quote?",
-    preferredContact: "phone",
-    timestamp: "2024-01-15T09:15:00Z",
-    status: "replied"
-  }
-]
+// Import types from server file (these are safe to use on client)
+interface ContactSubmission {
+  id: string
+  name: string
+  email: string
+  phone: string | null
+  company: string | null
+  sector: string | null
+  message: string
+  preferred_contact: string
+  status: 'new' | 'replied'
+  created_at: string
+  replied_at: string | null
+  admin_notes: string | null
+}
 
 export function ContactSubmissions() {
-  const [submissions, setSubmissions] = useState(mockSubmissions)
-  const [selectedSubmission, setSelectedSubmission] = useState<any>(null)
+  const [submissions, setSubmissions] = useState<ContactSubmission[]>([])
+  const [loading, setLoading] = useState(true)
+  const [selectedSubmission, setSelectedSubmission] = useState<ContactSubmission | null>(null)
   const [replyForm, setReplyForm] = useState({
     subject: "",
     message: ""
@@ -52,6 +41,31 @@ export function ContactSubmissions() {
   }>({ type: null, message: '' })
   const router = useRouter()
 
+  // Fetch submissions from API
+  const fetchSubmissions = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/contact')
+      if (response.ok) {
+        const data = await response.json()
+        setSubmissions(data.submissions || [])
+      } else {
+        console.error('Failed to fetch submissions')
+        setSubmissions([])
+      }
+    } catch (error) {
+      console.error('Error fetching submissions:', error)
+      setSubmissions([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Load submissions on component mount
+  useEffect(() => {
+    fetchSubmissions()
+  }, [])
+
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
@@ -62,11 +76,11 @@ export function ContactSubmissions() {
     }
   }
 
-  const handleReply = (submission: any) => {
+  const handleReply = (submission: ContactSubmission) => {
     setSelectedSubmission(submission)
     setReplyForm({
       subject: `Re: Inquiry from ${submission.name}`,
-      message: `Dear ${submission.name},\n\nThank you for your inquiry about ${submission.sector}.\n\n`
+      message: `Dear ${submission.name},\n\nThank you for your inquiry about ${submission.sector || 'our services'}.\n\n`
     })
   }
 
@@ -89,7 +103,8 @@ export function ContactSubmissions() {
           to: selectedSubmission.email,
           subject: replyForm.subject,
           message: replyForm.message,
-          replyTo: 'support@thomasikueromitan.com'
+          replyTo: 'support@thomasikueromitan.com',
+          submissionId: selectedSubmission.id
         }),
       })
 
@@ -101,7 +116,7 @@ export function ContactSubmissions() {
           message: 'Reply sent successfully!'
         })
         
-        // Update submission status
+        // Update submission status locally
         setSubmissions(prev => prev.map(sub => 
           sub.id === selectedSubmission.id 
             ? { ...sub, status: 'replied' }
@@ -152,19 +167,30 @@ export function ContactSubmissions() {
 
   return (
     <div className="space-y-8">
-      {/* Header with Logout */}
+      {/* Header with Logout and Refresh */}
       <div className="flex items-center justify-between">
         <h2 className="font-manrope font-semibold text-2xl text-foreground">
-          Contact Submissions
+          Contact Submissions ({submissions.length})
         </h2>
-        <Button 
-          variant="outline" 
-          onClick={handleLogout}
-          className="flex items-center space-x-2"
-        >
-          <LogOut className="h-4 w-4" />
-          <span>Logout</span>
-        </Button>
+        <div className="flex items-center space-x-3">
+          <Button 
+            variant="outline" 
+            onClick={fetchSubmissions}
+            disabled={loading}
+            className="flex items-center space-x-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+            <span>Refresh</span>
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={handleLogout}
+            className="flex items-center space-x-2"
+          >
+            <LogOut className="h-4 w-4" />
+            <span>Logout</span>
+          </Button>
+        </div>
       </div>
 
       {/* Status Messages */}
@@ -185,144 +211,159 @@ export function ContactSubmissions() {
         </div>
       )}
 
+      {/* Loading State */}
+      {loading && (
+        <Card className="border-0 shadow-lg">
+          <CardContent className="py-12 text-center">
+            <Loader2 className="h-12 w-12 text-muted-foreground mx-auto mb-4 animate-spin" />
+            <h3 className="font-manrope font-semibold text-lg mb-2">Loading Submissions...</h3>
+            <p className="text-muted-foreground">
+              Please wait while we fetch your contact form submissions.
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Submissions List */}
-      <div className="grid gap-6">
-        {submissions.map((submission) => (
-          <Card key={submission.id} className="border-0 shadow-lg">
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <User className="h-5 w-5 text-primary" />
+      {!loading && submissions.length > 0 && (
+        <div className="grid gap-6">
+          {submissions.map((submission) => (
+            <Card key={submission.id} className="border-0 shadow-lg">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <User className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <CardTitle className="font-manrope text-xl">{submission.name}</CardTitle>
+                      <CardDescription className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4" />
+                        <span>{submission.email}</span>
+                      </CardDescription>
+                    </div>
                   </div>
-                  <div>
-                    <CardTitle className="font-manrope text-xl">{submission.name}</CardTitle>
-                    <CardDescription className="flex items-center space-x-2">
-                      <Mail className="h-4 w-4" />
-                      <span>{submission.email}</span>
-                    </CardDescription>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  {getStatusBadge(submission.status)}
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => handleReply(submission)}
-                        className="flex items-center space-x-2"
-                      >
-                        <Reply className="h-4 w-4" />
-                        <span>Reply</span>
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-2xl">
-                      <DialogHeader>
-                        <DialogTitle>Reply to {submission.name}</DialogTitle>
-                        <DialogDescription>
-                          Send a professional reply from support@thomasikueromitan.com
-                        </DialogDescription>
-                      </DialogHeader>
-                      
-                      <div className="space-y-4">
-                        {/* Customer Info */}
-                        <div className="bg-muted/30 p-4 rounded-lg">
-                          <h4 className="font-semibold mb-2">Customer Inquiry:</h4>
-                          <div className="grid grid-cols-2 gap-4 text-sm">
-                            <div><strong>Company:</strong> {submission.company || 'Not provided'}</div>
-                            <div><strong>Sector:</strong> {submission.sector || 'Not provided'}</div>
-                            <div><strong>Phone:</strong> {submission.phone || 'Not provided'}</div>
-                            <div><strong>Preferred Contact:</strong> {submission.preferredContact}</div>
-                          </div>
-                          <div className="mt-3">
-                            <strong>Message:</strong>
-                            <p className="text-muted-foreground mt-1">{submission.message}</p>
-                          </div>
-                        </div>
-
-                        {/* Reply Form */}
-                        <div className="space-y-4">
-                          <div>
-                            <label className="block text-sm font-medium mb-2">Subject</label>
-                            <Input
-                              value={replyForm.subject}
-                              onChange={(e) => setReplyForm(prev => ({ ...prev, subject: e.target.value }))}
-                              placeholder="Enter email subject"
-                            />
-                          </div>
-                          
-                          <div>
-                            <label className="block text-sm font-medium mb-2">Your Reply</label>
-                            <Textarea
-                              value={replyForm.message}
-                              onChange={(e) => setReplyForm(prev => ({ ...prev, message: e.target.value }))}
-                              placeholder="Write your professional reply..."
-                              rows={8}
-                              className="resize-none"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Send Button */}
+                  <div className="flex items-center space-x-3">
+                    {getStatusBadge(submission.status)}
+                    <Dialog>
+                      <DialogTrigger asChild>
                         <Button 
-                          onClick={handleSendReply}
-                          disabled={isSending}
-                          className="w-full"
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleReply(submission)}
+                          className="flex items-center space-x-2"
                         >
-                          {isSending ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Sending Reply...
-                            </>
-                          ) : (
-                            <>
-                              <Send className="mr-2 h-4 w-4" />
-                              Send Reply
-                            </>
-                          )}
+                          <Reply className="h-4 w-4" />
+                          <span>Reply</span>
                         </Button>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
-            </CardHeader>
-            
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <h4 className="font-semibold mb-2">Inquiry Details</h4>
-                  <div className="space-y-2 text-sm text-muted-foreground">
-                    <div className="flex items-center space-x-2">
-                      <Building2 className="h-4 w-4" />
-                      <span>Sector: {submission.sector}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Phone className="h-4 w-4" />
-                      <span>Phone: {submission.phone || 'Not provided'}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4" />
-                      <span>Received: {formatTimestamp(submission.timestamp)}</span>
-                    </div>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl">
+                        <DialogHeader>
+                          <DialogTitle>Reply to {submission.name}</DialogTitle>
+                          <DialogDescription>
+                            Send a professional reply from support@thomasikueromitan.com
+                          </DialogDescription>
+                        </DialogHeader>
+                        
+                        <div className="space-y-4">
+                          {/* Customer Info */}
+                          <div className="bg-muted/30 p-4 rounded-lg">
+                            <h4 className="font-semibold mb-2">Customer Inquiry:</h4>
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                              <div><strong>Company:</strong> {submission.company || 'Not provided'}</div>
+                              <div><strong>Sector:</strong> {submission.sector || 'Not provided'}</div>
+                              <div><strong>Phone:</strong> {submission.phone || 'Not provided'}</div>
+                              <div><strong>Preferred Contact:</strong> {submission.preferred_contact}</div>
+                            </div>
+                            <div className="mt-3">
+                              <strong>Message:</strong>
+                              <p className="text-muted-foreground mt-1">{submission.message}</p>
+                            </div>
+                          </div>
+
+                          {/* Reply Form */}
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium mb-2">Subject</label>
+                              <Input
+                                value={replyForm.subject}
+                                onChange={(e) => setReplyForm(prev => ({ ...prev, subject: e.target.value }))}
+                                placeholder="Enter email subject"
+                              />
+                            </div>
+                            
+                            <div>
+                              <label className="block text-sm font-medium mb-2">Your Reply</label>
+                              <Textarea
+                                value={replyForm.message}
+                                onChange={(e) => setReplyForm(prev => ({ ...prev, message: e.target.value }))}
+                                placeholder="Write your professional reply..."
+                                rows={8}
+                                className="resize-none"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Send Button */}
+                          <Button 
+                            onClick={handleSendReply}
+                            disabled={isSending}
+                            className="w-full"
+                          >
+                            {isSending ? (
+                              <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Sending Reply...
+                              </>
+                            ) : (
+                              <>
+                                <Send className="mr-2 h-4 w-4" />
+                                Send Reply
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
-                
-                <div>
-                  <h4 className="font-semibold mb-2">Message</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {submission.message}
-                  </p>
+              </CardHeader>
+              
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold mb-2">Inquiry Details</h4>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-2">
+                        <Building2 className="h-4 w-4" />
+                        <span>Sector: {submission.sector || 'Not specified'}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Phone className="h-4 w-4" />
+                        <span>Phone: {submission.phone || 'Not provided'}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-4 w-4" />
+                        <span>Received: {formatTimestamp(submission.created_at)}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold mb-2">Message</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {submission.message}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
       {/* Empty State */}
-      {submissions.length === 0 && (
+      {!loading && submissions.length === 0 && (
         <Card className="border-0 shadow-lg">
           <CardContent className="py-12 text-center">
             <MessageCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
