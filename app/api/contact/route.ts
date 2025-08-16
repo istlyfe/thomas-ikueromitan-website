@@ -57,12 +57,13 @@ export async function POST(request: NextRequest) {
       <p>${message}</p>
       <hr>
       <p><em>This message was sent from your website contact form.</em></p>
+      <p><em>To reply, use the reply function in your dashboard or send to: ${email}</em></p>
     `
 
     // Send email to your business
     const { data, error } = await resend.emails.send({
-      from: 'Contact Form <noreply@thomasikueromitan.com>', // Update this with your domain
-      to: ['Thomas.ikueromitan@gmail.com'], // Updated to your email
+      from: 'Contact Form <support@thomasikueromitan.com>', // Updated to your new domain
+      to: ['support@thomasikueromitan.com'], // Changed to your domain email
       subject: `New Contact Form Submission from ${name}`,
       html: emailContent,
     })
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
     `
 
     await resend.emails.send({
-      from: 'Thomas Ikueromitan & Sons <noreply@thomasikueromitan.com>', // Updated domain
+      from: 'Thomas Ikueromitan & Sons <support@thomasikueromitan.com>', // Updated to your new domain
       to: [email],
       subject: 'Thank you for contacting us - Thomas Ikueromitan & Sons',
       html: confirmationEmail,
@@ -110,6 +111,63 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Contact form error:', error)
+    return NextResponse.json(
+      { error: 'Something went wrong. Please try again later.' },
+      { status: 500 }
+    )
+  }
+}
+
+// New API endpoint for sending replies
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { to, subject, message, replyTo } = body
+
+    // Basic validation
+    if (!to || !subject || !message) {
+      return NextResponse.json(
+        { error: 'To, subject, and message are required' },
+        { status: 400 }
+      )
+    }
+
+    // Check if Resend is available
+    if (!resend) {
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      )
+    }
+
+    // Send reply email
+    const { data, error } = await resend.emails.send({
+      from: 'Thomas Ikueromitan & Sons <support@thomasikueromitan.com>',
+      to: [to],
+      replyTo: replyTo || 'support@thomasikueromitan.com',
+      subject: subject,
+      html: message,
+    })
+
+    if (error) {
+      console.error('Reply email sending failed:', error)
+      return NextResponse.json(
+        { error: 'Failed to send reply email. Please try again later.' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json(
+      { 
+        success: true, 
+        message: 'Reply email sent successfully!',
+        data 
+      },
+      { status: 200 }
+    )
+
+  } catch (error) {
+    console.error('Reply email error:', error)
     return NextResponse.json(
       { error: 'Something went wrong. Please try again later.' },
       { status: 500 }
