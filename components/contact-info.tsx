@@ -59,12 +59,9 @@ export function ContactInfo() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-            <div>
-              <h4 className="font-semibold text-foreground">Email</h4>
-              <p className="text-muted-foreground">Thomasikueromitan@gmail.com</p>
-            </div>
+          <div className="flex items-center space-x-2">
+            <Mail className="h-5 w-5 text-primary" />
+            <p className="text-muted-foreground">support@thomasikueromitan.com</p>
           </div>
 
           <div className="flex items-center space-x-3">

@@ -25,16 +25,16 @@ Create a file called `.env.local` in your project root with:
 RESEND_API_KEY=your_actual_resend_api_key_here
 
 # Email Configuration (update these with your actual details)
-FROM_EMAIL=noreply@thomasikueromitan.com
-TO_EMAIL=Thomas.ikueromitan@gmail.com
-ADMIN_EMAIL=Thomas.ikueromitan@gmail.com
+FROM_EMAIL=support@thomasikueromitan.com
+TO_EMAIL=support@thomasikueromitan.com
+ADMIN_EMAIL=support@thomasikueromitan.com
 ```
 
 ### **3. Update Email Addresses:**
 In the file `app/api/contact/route.ts`, update these lines:
-- Line 47: `from: 'Contact Form <noreply@thomasikueromitan.com>'` ✅ **Already Updated**
-- Line 48: `to: ['Thomas.ikueromitan@gmail.com']` ✅ **Already Updated**
-- Line 67: `from: 'Thomas Ikueromitan & Sons <noreply@thomasikueromitan.com>'` ✅ **Already Updated**
+- Line 47: `from: 'Contact Form <support@thomasikueromitan.com>'` ✅ **Already Updated**
+- Line 48: `to: ['support@thomasikueromitan.com']` ✅ **Already Updated**
+- Line 67: `from: 'Thomas Ikueromitan & Sons <support@thomasikueromitan.com>'` ✅ **Already Updated**
 
 ## 📧 **How It Works:**
 
