@@ -1,0 +1,22 @@
+{
+  "name": "Thomas Ikueromitan and Sons Nigeria Limited",
+  "short_name": "Thomas Ikueromitan",
+  "description": "Reliable sourcing in building materials, automobiles, agriculture, and transport & haulage across Nigeria and West Africa.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/cac_logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

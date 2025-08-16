@@ -20,6 +20,16 @@ export const metadata: Metadata = {
   description:
     "Reliable sourcing in building materials, automobiles, agriculture, and transport & haulage across Nigeria and West Africa.",
   generator: "v0.app",
+  icons: {
+    icon: [
+      { url: '/cac_logo.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  manifest: '/site.webmanifest',
+  themeColor: '#0f172a',
 }
 
 export default function RootLayout({
