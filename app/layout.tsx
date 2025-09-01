@@ -22,12 +22,12 @@ export const metadata: Metadata = {
   generator: "v0.app",
   icons: {
     icon: [
-      { url: '/TIS_logo.png', sizes: 'any', type: 'image/png' },
+      { url: '/logo.png', sizes: 'any', type: 'image/png' },
       { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
       { url: '/cac_logo.svg', type: 'image/svg+xml' },
     ],
-    shortcut: '/TIS_logo.png',
-    apple: '/TIS_logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
   },
   manifest: '/site.webmanifest',
 }
@@ -44,10 +44,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} antialiased`}>
       <head>
-        <link rel="icon" href="/TIS_logo.png" sizes="any" />
+        <link rel="icon" href="/logo.png" sizes="any" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/TIS_logo.png" />
-        <link rel="shortcut icon" href="/TIS_logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="shortcut icon" href="/logo.png" />
       </head>
       <body className="font-sans">{children}</body>
     </html>
