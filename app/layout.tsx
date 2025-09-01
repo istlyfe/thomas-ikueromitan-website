@@ -22,11 +22,12 @@ export const metadata: Metadata = {
   generator: "v0.app",
   icons: {
     icon: [
+      { url: '/TIS_logo.png', sizes: 'any', type: 'image/png' },
       { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
       { url: '/cac_logo.svg', type: 'image/svg+xml' },
     ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    shortcut: '/TIS_logo.png',
+    apple: '/TIS_logo.png',
   },
   manifest: '/site.webmanifest',
 }
